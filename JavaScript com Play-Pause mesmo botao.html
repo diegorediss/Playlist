@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+			<link rel="stylesheet" type="text/css" href="estilo.css">
+				<title>
+					Tocando música com JavaScript
+				</title>
+		</head>
+			<body>
+
+	</script>
+		<!--	-->
+
+		<audio controls="controls" id="tocador"  onplay="textoplay('t');"  onpause="textoplay('p');">
+
+		</audio>
+			<br /><br />
+
+			<input type="button" value="play" id="botao" onclick="txtbotao();" />
+			<br />
+			<input type="button" value="Vol +"  onclick="altvol('+');" />
+			<input type="button" value="Vol -"   onclick="altvol('-');" />
+			<br />
+			<input type="text" placeholder="tempo em segundos" id="tempo"/>
+			<input type="button"  value="Ir"  onclick="tempo();" />
+			<br />
+			<input type="button" value="Próxima"  onclick="proxima();" />
+			<input type="button" value="Anterior"   onclick="anterior();" />
+			<br />
+			<br />
+			<br />
+				<p id="texto"> </p>
+
+			</body>
+
+		<script>
+			var i = 1;
+			var musicas = [{ mp3:'heranca.mp3' },{ mp3:'rainbow.mp3'},{ mp3:'redemption.mp3'},];
+
+    			tocador = document.getElementById('tocador');
+    			tocador.src = musicas[0].mp3;
+    			tocador.load;
+    			tocador.autoplay=true;
+
+
+				function tempo()
+				{
+					var tempo = document.getElementById("tempo");
+					tocador.currentTime = tempo.value
+				}
+
+				function altvol(click)
+				{
+					if(click == '+')
+					{
+						tocador.volume = tocador.volume + 0.1;
+					}
+						else
+						{
+							tocador.volume = tocador.volume - 0.1;
+						}
+				}
+
+				function txtbotao()
+				{
+					var botao = document.getElementById("botao");
+					tocador.ended = i++;
+
+					if ( tocador.paused == true )
+					{
+						tocador.autoplay=true;
+						tocador.load;
+						tocador.play();
+						botao.value = "Tocando";
+					}
+						else
+						{
+							tocador.pause();
+							botao.value = "Pausado";
+						}
+				}
+
+				function textoplay(status)
+				{
+					if( status == 't')
+					{
+						var musica = tocador.src;  // pega o caminho da musica
+						var vetormusica = musica.split("/"); // divide o caminho pela qtde de /    /    /
+						var tamvetor = vetormusica.length; // tamanho do vetor
+						musica = vetormusica[tamvetor-1];
+
+						document.getElementById("texto").innerHTML =  " Tocando - " + musica ;
+					}
+					else
+					{
+						document.getElementById("texto").innerHTML =   " Pausada " ;
+					}
+				}
+
+				function proxima()
+				{
+						{
+							tocador.src = musicas[i].mp3;
+						}
+							tocador.play();
+ 							i++;
+							if( i >= musicas.length )
+							i = 0;
+				}
+
+				function anterior()
+				{
+						{
+							tocador.src = musicas[i].mp3;
+						}
+							tocador.play();
+ 							i-- ;
+							if( i <= musicas.length-2 ) i = 2;
+				}
+		</script>
+
+
+</html>
