@@ -35,15 +35,21 @@
 			</body>
 
 		<script>
-			var i = 1;
+			var i = 0;
 			var musicas = [{ mp3:'heranca.mp3' },{ mp3:'rainbow.mp3'},{ mp3:'redemption.mp3'},];
 
+				totalmusicas = musicas.lengt;
+				tocador.addEventListener('ended', proxima , false);
     			tocador = document.getElementById('tocador');
-    			tocador.src = musicas[0].mp3;
-    			tocador.load;
-    			tocador.autoplay=true;
+    			tocador.src = musicas[i].mp3;
+    			tocador.autoplay = true;
+    			if (tocador.ended = true)
+    			{
+    				i=i+1;
+    				tocador.play();
+    			}	
 
-
+    			
 				function tempo()
 				{
 					var tempo = document.getElementById("tempo");
@@ -65,15 +71,12 @@
 				function txtbotao()
 				{
 					var botao = document.getElementById("botao");
-					tocador.ended = i++;
 
 					if ( tocador.paused == true )
 					{
-						tocador.autoplay=true;
-						tocador.load;
 						tocador.play();
 						botao.value = "Tocando";
-					}
+		    		}
 						else
 						{
 							tocador.pause();
@@ -100,24 +103,26 @@
 
 				function proxima()
 				{
-						{
-							tocador.src = musicas[i].mp3;
+					tocador.src = musicas[i].mp3;
+					tocador.play();
+ 					i++;
+ 						{
+						if( i >= musicas.length )
+						i = 0;
 						}
-							tocador.play();
- 							i++;
-							if( i >= musicas.length )
-							i = 0;
 				}
 
 				function anterior()
 				{
+					tocador.src = musicas[i].mp3;
+					tocador.play();
 						{
-							tocador.src = musicas[i].mp3;
+							if( i == 0) 
+							i = musicas.length;
+							i--;
 						}
-							tocador.play();
- 							i-- ;
-							if( i <= musicas.length-2 ) i = 2;
 				}
+
 		</script>
 
 
