@@ -116,10 +116,10 @@
 				{
 					tocador.src = musicas[i].mp3;
 					tocador.play();
-						{
-							if( i == 0) 
-							i = musicas.length;
-							i--;
+ 					i--;
+ 						{
+							if( i < 0 )
+							i = musicas.length-1;
 						}
 				}
 
